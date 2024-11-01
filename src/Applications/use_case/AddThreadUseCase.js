@@ -11,14 +11,24 @@ class AddThreadUseCase {
     }
 
     async execute(payload,credential) {
+        
         const domThread = new Thread({
             id:`thread-${  this._nanoId(20)}`,
             dt: Date.now(),
             bodyreq: payload,
             user:credential
         });
+        
         await this._repoThread.addThread(domThread);
-        return domThread;
+
+        return {
+            addedThread : {
+                id:domThread.id,
+                title:domThread.title,
+                owner:domThread.owner
+            }
+        }
+
     }
 
 };

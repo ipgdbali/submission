@@ -1,5 +1,4 @@
 const Reply = require("../../Domains/thread/entities/Reply")
-const NotFoundError = require('../../Commons/exceptions/NotFoundError')
 
 /**
  *
@@ -14,11 +13,11 @@ class AddThreadCommentReplyUseCase
     async execute(threadId,commentId,payload,credential) {
         
         if(!await this._repoThread.getThreadById(threadId)) {
-            throw new NotFoundError('Thread tidak ada')
+            throw new Error('THREAD_NOT_FOUND');
         }
 
         if(!await this._repoThread.getCommentById(commentId)){
-            throw new NotFoundError('Comment tidak ada')
+            throw new Error('COMMENT_NOT_FOUND');
         }
         
         const domReply = new Reply({
@@ -30,9 +29,15 @@ class AddThreadCommentReplyUseCase
             is_delete:false
         })
         
-        
         await this._repoThread.addReply(domReply);
-        return domReply;
+
+        return {
+            addedReply : {
+                id: domReply.id,
+                content:domReply.content,
+                owner:domReply.owner
+            }
+        };
 
     }
 

@@ -1,6 +1,5 @@
 const GetThreadDetailUseCase = require('../GetThreadDetailUseCase')
 const ThreadRepository = require('../../../Domains/thread/ThreadRepository');
-const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
 const Thread = require('../../../Domains/thread/entities/Thread');
 const Comment = require('../../../Domains/thread/entities/Comment');
 const Reply = require('../../../Domains/thread/entities/Reply');
@@ -15,7 +14,7 @@ describe('GetThreadDetailUseCase',() => {
         mockRepoThread.getThreadById = jest.fn((id) => Promise.resolve(null));
 
         const usecase = new GetThreadDetailUseCase(mockRepoThread);
-        await expect(() => usecase.execute({})).rejects.toThrow(new NotFoundError('Thread Not Found'));
+        await expect(() => usecase.execute({})).rejects.toThrow(new Error('NOT_FOUND_ERROR'));
 
     })
 

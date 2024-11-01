@@ -26,29 +26,16 @@ class ThreadsHandler {
     const ret = await this._container.getInstance(AddThreadUseCase.name).execute(req.payload,req.auth.credentials);
     return h.response({
         status: "success",
-        data: {
-            "addedThread" : {
-                id:ret.id,
-                title:ret.title,
-                owner:ret.owner
-            }
-        }
+        data: ret
     }).code(201);
   }
 
   async postThreadsCommentsHandler(req,h) {
 
     const ret = await this._container.getInstance(AddThreadCommentUseCase.name).execute(req.params.threadId,req.payload,req.auth.credentials);
-    
     return h.response({
         status: "success",
-        data: {
-            "addedComment" : {
-                id:ret.id,
-                content:ret.content,
-                owner:ret.owner
-            }
-        }
+        data: ret
     }).code(201);
 
   }
@@ -76,14 +63,8 @@ class ThreadsHandler {
 
     const ret = await this._container.getInstance(AddThreadCommentReplyUseCase.name).execute(req.params.threadId,req.params.commentId,req.payload,req.auth.credentials);
     return h.response({
-        status: "success",
-        data:{
-            "addedReply" : {
-                id: ret.id,
-                content:ret.content,
-                owner:ret.owner
-            }
-        }
+          status: "success",
+          data: ret
     }).code(201);
 
   }
@@ -96,7 +77,6 @@ class ThreadsHandler {
     }).code(200);
 
   }
-
 }
 
 module.exports = ThreadsHandler;

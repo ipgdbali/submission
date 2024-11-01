@@ -85,17 +85,19 @@ describe('/threads endpoint', () => {
         })
 
         it('should error if payload has missing property',async () => {
+
             const payload = {
                 title:"title",
-              };
+            };
+
             const response = await server.inject({
                 method: 'POST',
                 url: '/threads',
                 headers:{
-                    "Authorization": `Bearer ${  accessToken}`
+                    "Authorization": `Bearer ${ accessToken }`
                 },
                 payload
-              });
+            });
             expect(response.statusCode).toEqual(400);
             const responseJson = JSON.parse(response.payload);
             expect(responseJson.status).toEqual('fail');
@@ -122,6 +124,7 @@ describe('/threads endpoint', () => {
         })
 
         it('should add thread correctly',async () => {
+
             const payload = {
                 title:"title",
                 body:"body",
@@ -185,6 +188,7 @@ describe('/threads endpoint', () => {
         
               // Assert
               responseJson = JSON.parse(response.payload);
+
               expect(response.statusCode).toEqual(201);
               expect(responseJson.status).toEqual('success');
               expect(responseJson.data.addedComment.content).toBe(payload.content)
@@ -194,10 +198,9 @@ describe('/threads endpoint', () => {
         })
     })
 
-    describe('del Comment',() => {
+    describe('Delete Comment',() => {
 
         it('should delete comment correctly',async () => {
-              
       
             // add Thread 
             const thread_payload = {
@@ -229,9 +232,9 @@ describe('/threads endpoint', () => {
 
             response = await server.inject({
               method: 'POST',
-              url: `/threads/${  threadId  }/comments`,
+              url: `/threads/${threadId}/comments`,
               headers:{
-                  "Authorization": `Bearer ${  accessToken}`
+                  "Authorization": `Bearer ${accessToken}`
               },
               payload
             });
@@ -261,6 +264,18 @@ describe('/threads endpoint', () => {
         })
 
     });
+
+    describe('Add Reply',() => {
+        it('should add reply correctly',async () => {
+        });
+    });
+
+    describe('Del Reply',() => {
+        it('should',async () => {
+        })
+
+    });
+
 
     it('should do everything correctly',async () => {
 

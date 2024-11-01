@@ -1,8 +1,3 @@
-const NotFoundError = require('./../../Commons/exceptions/NotFoundError')
-
-/**
- *
- */
 class GetThreadDetailUseCase {
 
     constructor(repoThread) {
@@ -13,15 +8,16 @@ class GetThreadDetailUseCase {
         
         const thread = await this._repoThread.getThreadById(threadId);
 
-        if(thread == null)
-            {throw new NotFoundError('Thread Not Found');}
+        if(thread == null) {
+            throw new Error('NOT_FOUND_ERROR');
+        }
         
         const comments = (await this._repoThread.getCommentsByThreadId(threadId)).map( (x) => ({
                 id:x.id,
                 username:x.username,
                 date: new Date(x.dt).toISOString(),
                 content: (x.is_delete)? '**komentar telah dihapus**':x.content
-            }));
+        }));
         
         
         for(const comment of comments) {

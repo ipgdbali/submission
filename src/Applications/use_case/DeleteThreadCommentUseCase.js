@@ -1,9 +1,5 @@
-const NotFoundError = require("../../Commons/exceptions/NotFoundError");
 const AuthorizationError = require("../../Commons/exceptions/AuthorizationError");
 
-/**
- *
- */
 class DeleteThreadCommentUseCase {
 
     constructor(repoThread) {
@@ -14,15 +10,15 @@ class DeleteThreadCommentUseCase {
 
         const thread = await this._repoThread.getThreadById(threadId);
         if(thread == null)
-            {throw new NotFoundError('Thread tidak ditemukan');}
+            {throw new Error('THREAD_NOT_FOUND');}
 
         const comment = await this._repoThread.getCommentById(commentId);
 
         if(comment == null)
-            {throw new NotFoundError('Komentar tidak ditemukan');}
+            {throw new Error('COMMENT_NOT_FOUND');}
         
         if(comment.owner != credential.id){
-            throw new AuthorizationError('Bukan commentar anda')
+            throw new Error('NOT_YOUR_COMMENT')
         }
 
         return await this._repoThread.delCommentById(commentId);

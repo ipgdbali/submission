@@ -1,10 +1,5 @@
 const Comment = require("../../Domains/thread/entities/Comment");
-const NotFoundError = require('../../Commons/exceptions/NotFoundError')
 
-
-/**
- *
- */
 class AddThreadCommentUseCase 
 {
 
@@ -15,9 +10,10 @@ class AddThreadCommentUseCase
 
     async execute(threadId,payload,credential) {
 
-        if(! await this._repoThread.getThreadById(threadId))
-            {throw new NotFoundError('Thread tidak ada')}
-
+        if(! await this._repoThread.getThreadById(threadId)) {
+            throw new Error('THREAD_NOT_FOUND');
+        }
+            
         const domComment = new Comment({
             id:`comment-${  this._nanoid(20)}`,
             dt:Date.now(),
@@ -28,7 +24,13 @@ class AddThreadCommentUseCase
         });
 
         await this._repoThread.addComment(domComment);
-        return domComment;
+        return {
+            addedComment : {
+                id:domComment.id,
+                content:domComment.content,
+                owner:domComment.owner
+            }
+        };
 
     }
 }

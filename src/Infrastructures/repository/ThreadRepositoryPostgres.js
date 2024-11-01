@@ -2,9 +2,6 @@ const Thread = require('../../Domains/thread/entities/Thread');
 const Comment = require('../../Domains/thread/entities/Comment');
 const Reply = require('../../Domains/thread/entities/Reply');
 
-/**
- *
- */
 class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRepository') {
 
     constructor(pool) {
@@ -26,45 +23,42 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
 
     async getThreadById(id) {
         const res = await this._pool.query("SELECT t.id,t.dt,t.title,t.body,t.owner,u.username FROM thread t INNER JOIN users u ON (t.owner = u.id) WHERE t.id = $1",[id]);
-        if(res.rowCount === 0)
-        {
+        if(res.rowCount === 0) {
             return null;
-        } 
-            return new Thread({
-                id : res.rows[0].id,
-                dt : Number(res.rows[0].dt),
-                bodyreq:{
-                    title: res.rows[0].title,
-                    body: res.rows[0].body
-                },
-                user:{
-                    id:res.rows[0].owner,
-                    username:res.rows[0].username
-                }
-            });
-        
-
+        } else 
+        return new Thread({
+            id : res.rows[0].id,
+            dt : Number(res.rows[0].dt),
+            bodyreq:{
+                title: res.rows[0].title,
+                body: res.rows[0].body
+            },
+            user:{
+                id:res.rows[0].owner,
+                username:res.rows[0].username
+            }
+        });
     }
 
     async getCommentById(id) {
         
         const res = await this._pool.query("SELECT c.id,c.dt,c.threadid,c.content,c.owner,u.username,c.is_delete FROM comment c INNER JOIN users u ON (c.owner = u.id) WHERE c.id = $1",[id]);
-        if(res.rowCount === 0){
+        if(res.rowCount === 0) {
             return null
-        } 
-            return new Comment({
-                id : res.rows[0].id,
-                dt : Number(res.rows[0].dt),
-                threadId: res.rows[0].threadid,
-                bodyreq:{
-                    content: res.rows[0].content
-                },
-                user:{
-                    id: res.rows[0].owner,
-                    username: res.rows[0].username
-                },
-                is_delete :  Boolean(res.rows[0].is_delete)
-            })
+        } else 
+        return new Comment({
+            id : res.rows[0].id,
+            dt : Number(res.rows[0].dt),
+            threadId: res.rows[0].threadid,
+            bodyreq:{
+                content: res.rows[0].content
+            },
+            user:{
+                id: res.rows[0].owner,
+                username: res.rows[0].username
+            },
+            is_delete :  Boolean(res.rows[0].is_delete)
+        })
         
     }
 
@@ -83,8 +77,15 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
                 },
                 is_delete: x.is_delete
             }));
-
         return ret;
+    }
+
+    async addReply(domReply) {
+        await this._pool.query("INSERT INTO reply (id,dt,commentid,content,owner,is_delete) VALUES ($1,$2,$3,$4,$5,false)",[domReply.id,domReply.dt,domReply.commentId,domReply.content,domReply.owner]);
+    }
+
+    async delReplyById(id) {
+        await this._pool.query("UPDATE reply SET is_delete = true WHERE id = $1",[id])
     }
 
     async getReplyById(id) {
@@ -92,7 +93,7 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
         const res = await this._pool.query("SELECT r.id,r.dt,r.commentid,r.content,r.owner,u.username,r.is_delete FROM reply r INNER JOIN users u ON (r.owner = u.id) WHERE r.id = $1",[id]);
         if(res.rowCount === 0) {
             return null;
-        } 
+        } else {
             return new Reply({
                 id: res.rows[0].id,
                 dt: Number(res.rows[0].dt),
@@ -106,7 +107,7 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
                 },
                 is_delete : res.rows[0].is_delete
             });
-        
+        }
     }
 
     async getRepliesByCommentId(id) {
@@ -124,14 +125,6 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
                 },
                 is_delete : Boolean(x.is_delete)
             }))        
-    }
-
-    async addReply(domReply) {
-        await this._pool.query("INSERT INTO reply (id,dt,commentid,content,owner,is_delete) VALUES ($1,$2,$3,$4,$5,false)",[domReply.id,domReply.dt,domReply.commentId,domReply.content,domReply.owner]);
-    }
-
-    async delReplyById(id) {
-        await this._pool.query("UPDATE reply SET is_delete = true WHERE id = $1",[id])
     }
 
 };

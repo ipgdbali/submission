@@ -3,8 +3,9 @@ const ThreadRepository = require('../../../Domains/thread/ThreadRepository');
 
 describe('AddThreadUseCase', () => {
 
+    const id = '1234'
     const mockRepoThread = new ThreadRepository();
-    const mockNanoId = jest.fn( (len) => '1234' );
+    const mockNanoId = jest.fn( (len) => id );
 
     it('should return correct value',async () => {
 
@@ -29,7 +30,7 @@ describe('AddThreadUseCase', () => {
         expect(mockRepoThread.addThread).toBeCalledTimes(1)
         expect(mockNanoId).toBeCalledTimes(1)
 
-        expect(mockRepoThread.addThread.mock.calls[0][0].id).toBe('thread-1234');
+        expect(mockRepoThread.addThread.mock.calls[0][0].id).toBe('thread-' + id);
         expect(mockRepoThread.addThread.mock.calls[0][0].dt).toBeLessThanOrEqual(Date.now());
         expect(mockRepoThread.addThread.mock.calls[0][0].dt).toBeGreaterThan(Date.now() - 3000);
         expect(mockRepoThread.addThread.mock.calls[0][0].title).toBe(payload.title)
@@ -37,12 +38,9 @@ describe('AddThreadUseCase', () => {
         expect(mockRepoThread.addThread.mock.calls[0][0].owner).toBe(credential.id)
         expect(mockRepoThread.addThread.mock.calls[0][0].username).toBe(credential.username)
 
-        expect(ret.id).toBe('thread-1234');
-        expect(ret.title).toBe(payload.title)
-        expect(ret.dt).toBeLessThanOrEqual(Date.now())
-        expect(ret.body).toBe(payload.body)
-        expect(ret.owner).toBe(credential.id)
-        expect(ret.username).toBe(credential.username)
+        expect(ret.addedThread.id).toBe('thread-' + id);
+        expect(ret.addedThread.title).toBe(payload.title)
+        expect(ret.addedThread.owner).toBe(credential.id)
 
     })
 })

@@ -9,7 +9,7 @@ describe('DeleteThreadCommentUseCase', () => {
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null));
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
 
-        await expect(() => usecase.execute({},{},{}) ).rejects.toThrowError('Thread tidak ditemukan')
+        await expect(() => usecase.execute({},{},{}) ).rejects.toThrowError('THREAD_NOT_FOUND')
         
     });
 
@@ -19,7 +19,7 @@ describe('DeleteThreadCommentUseCase', () => {
         mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(null) );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
-        await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('Komentar tidak ditemukan');
+        await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('COMMENT_NOT_FOUND');
 
     })
 
@@ -32,7 +32,7 @@ describe('DeleteThreadCommentUseCase', () => {
         mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment_ret) );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
-        await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('Bukan commentar anda');
+        await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('NOT_YOUR_COMMENT');
 
     })
 
@@ -42,7 +42,7 @@ describe('DeleteThreadCommentUseCase', () => {
             owner: 'userid'
         }
         mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment_ret) );
-        mockRepoThread.delCommentById = jest.fn( (commentId) => {})
+        mockRepoThread.delCommentById = jest.fn( (commentId) => Promise.resolve() );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
         const threadId = 'threadId';
