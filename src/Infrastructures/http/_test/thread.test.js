@@ -61,8 +61,8 @@ describe('/threads endpoint', () => {
     })
 
     afterAll( async () => {
-        UsersTableTestHelper.cleanTable();
-        AuthenticationsTableTestHelper.cleanTable();
+        await UsersTableTestHelper.cleanTable();
+        await AuthenticationsTableTestHelper.cleanTable();
     })
 
     

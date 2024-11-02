@@ -38,6 +38,7 @@ describe('AddThreadCommentUseCase', () => {
         const usecase = new AddThreadCommentUseCase(mockRepoThread,mockNanoId);
 
         await expect( () => usecase.execute(comment.threadId,comment.bodyreq,comment.user) ).rejects.toThrow('THREAD_NOT_FOUND')
+        
         expect(mockRepoThread.getThreadById).toBeCalledTimes(1);
         expect(mockRepoThread.getThreadById).toBeCalledWith(comment.threadId);
         

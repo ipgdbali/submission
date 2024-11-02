@@ -46,7 +46,8 @@ describe('AddThreadCommentReplyUseCase', () => {
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null) );
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
         
-        expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('THREAD_NOT_FOUND')
+        expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('THREAD_NOT_FOUND');
+        
         expect(mockRepoThread.getThreadById).toBeCalledTimes(1);
         expect(mockRepoThread.getThreadById).toBeCalledWith(thread.id);
     });
@@ -58,6 +59,7 @@ describe('AddThreadCommentReplyUseCase', () => {
 
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
         expect(() => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrow('COMMENT_NOT_FOUND');
+
         expect(await mockRepoThread.getCommentById).toBeCalledTimes(1);
         expect(await mockRepoThread.getCommentById).toBeCalledWith(comment.id);
 
