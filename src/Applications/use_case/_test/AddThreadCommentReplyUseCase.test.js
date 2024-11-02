@@ -42,23 +42,30 @@ describe('AddThreadCommentReplyUseCase', () => {
     }
 
     it('should throw Error when Thread is not found', () => {
-
+        // Arrange 
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null) );
+
+        // Action 
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
         
+        // Assert
         expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('THREAD_NOT_FOUND');
         
         expect(mockRepoThread.getThreadById).toBeCalledTimes(1);
         expect(mockRepoThread.getThreadById).toBeCalledWith(thread.id);
+
     });
 
     it('should throw Error when Comment is not found', async () => {
-
+        // Arrange
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread) );
         mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(null) );
 
+        // Action
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
-        expect(() => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrow('COMMENT_NOT_FOUND');
+
+        // Assert
+        expect(() => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('COMMENT_NOT_FOUND');
 
         expect(await mockRepoThread.getCommentById).toBeCalledTimes(1);
         expect(await mockRepoThread.getCommentById).toBeCalledWith(comment.id);
@@ -66,14 +73,16 @@ describe('AddThreadCommentReplyUseCase', () => {
     })
 
     it('should return correct value',async () => {
-        
+        // Arrange
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread) )
         mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment) );
         mockRepoThread.addReply = jest.fn ( (dom) => Promise.resolve() )
 
+        // Action
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
         const ret = await usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user);
 
+        // Assert
         expect(mockNanoId).toBeCalledTimes(1);
 
         expect(mockRepoThread.addReply).toBeCalledTimes(1)

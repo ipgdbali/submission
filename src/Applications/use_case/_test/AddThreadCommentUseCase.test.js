@@ -32,11 +32,13 @@ describe('AddThreadCommentUseCase', () => {
     }
 
     it('should throw error if no thread is found' ,async () => {
-
+        // Arrange
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null));
 
+        // Action
         const usecase = new AddThreadCommentUseCase(mockRepoThread,mockNanoId);
 
+        // Assert
         await expect( () => usecase.execute(comment.threadId,comment.bodyreq,comment.user) ).rejects.toThrow('THREAD_NOT_FOUND')
         
         expect(mockRepoThread.getThreadById).toBeCalledTimes(1);
@@ -45,14 +47,15 @@ describe('AddThreadCommentUseCase', () => {
     })
 
     it('should return correct value', async () => {
-
+        // Arrange
         mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread));
         mockRepoThread.addComment = jest.fn( (domComment) => Promise.resolve())
-
+        
+        // Action
         const usecase = new AddThreadCommentUseCase(mockRepoThread,mockNanoId);
-
         const ret = await usecase.execute(comment.threadId,comment.bodyreq,comment.user);
 
+        // Assert
         expect(mockRepoThread.addComment).toBeCalledTimes(1);
         expect(mockRepoThread.addComment.mock.calls[0][0].id).toBe(comment.id);
         expect(mockRepoThread.addComment.mock.calls[0][0].dt).toBeLessThanOrEqual(Date.now());
