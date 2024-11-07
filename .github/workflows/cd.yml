@@ -24,4 +24,4 @@ jobs:
           cd ~/submission
           git pull origin master
           npm run migrate up
-          pm2 restart auth-api
+          pm2 restart forumapi
