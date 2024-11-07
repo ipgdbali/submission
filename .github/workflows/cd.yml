@@ -20,8 +20,5 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+          ls -al 
           cd ~/submission
-          git pull origin master
-          echo "Hello World"
-          npm run migrate up
-          pm2 restart forumapi
