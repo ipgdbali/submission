@@ -20,10 +20,8 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          echo "Sebelum"
-          env
           source ./init
-          echo "Setelah"
-          env
           cd ~/submission
-          npm run test
+          git pull origin master
+          npm run migrate up
+          pm2 restart auth-api
