@@ -23,6 +23,7 @@ jobs:
           echo "Sebelum"
           env
           source init
+          export PATH=/home/ubuntu/.nvm/versions/node/v22.11.0/bin:$PATH
           echo "Setelah"
           env
           npm run test
