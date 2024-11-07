@@ -21,4 +21,5 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         script: |
           source /etc/profile
+          env
           npm run test
