@@ -22,5 +22,6 @@ jobs:
         script: |
           cd ~/submission
           git pull origin master
+          echo "Hello World"
           npm run migrate up
           pm2 restart forumapi
