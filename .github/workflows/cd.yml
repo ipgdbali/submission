@@ -20,7 +20,5 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          source .bashrc
+          export ASD=DSA
           env
-          ls -al 
-          cd ~/submission
