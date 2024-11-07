@@ -22,8 +22,7 @@ jobs:
         script: |
           echo "Sebelum"
           env
-          source /etc/profile
-          export ASD=DSA
+          source init
           echo "Setelah"
           env
           npm run test
