@@ -20,5 +20,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
-          export ASD=DSA
-          env
+          npm run test
