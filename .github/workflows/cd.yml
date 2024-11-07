@@ -22,7 +22,7 @@ jobs:
         script: |
           echo "Sebelum"
           env
-          source init
+          source ./init
           echo "Setelah"
           env
           cd ~/submission
