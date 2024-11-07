@@ -20,6 +20,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         script: |
+          source .bashrc
           env
           ls -al 
           cd ~/submission
