@@ -7,7 +7,6 @@ const container = require('./Infrastructures/container');
   await server.start();
   
    
-  /* eslint-disable no-console */
   console.log(`server start at ${server.info.uri}`);
-  /* eslint-enable no-console */
+
 })();

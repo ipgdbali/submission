@@ -5,11 +5,11 @@ describe('AddThreadUseCase', () => {
 
     const id = '1234'
     const mockRepoThread = new ThreadRepository();
-    const mockNanoId = jest.fn( (len) => id );
+    const mockNanoId = jest.fn( () => id );
 
     it('should return correct value',async () => {
 
-        mockRepoThread.addThread = jest.fn( (thread) => {
+        mockRepoThread.addThread = jest.fn( () => {
             Promise.resolve()
         })
 

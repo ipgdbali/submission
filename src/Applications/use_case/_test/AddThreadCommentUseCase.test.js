@@ -5,7 +5,7 @@ describe('AddThreadCommentUseCase', () => {
 
     const id = '1234'
     const mockRepoThread = new ThreadRepository();
-    const mockNanoId = jest.fn( (len) => id );
+    const mockNanoId = jest.fn( () => id );
 
     const thread = {
         id : 'thread-' + id,
@@ -33,7 +33,7 @@ describe('AddThreadCommentUseCase', () => {
 
     it('should throw error if no thread is found' ,async () => {
         // Arrange
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null));
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(null));
 
         // Action
         const usecase = new AddThreadCommentUseCase(mockRepoThread,mockNanoId);
@@ -48,8 +48,8 @@ describe('AddThreadCommentUseCase', () => {
 
     it('should return correct value', async () => {
         // Arrange
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread));
-        mockRepoThread.addComment = jest.fn( (domComment) => Promise.resolve())
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(thread));
+        mockRepoThread.addComment = jest.fn( () => Promise.resolve())
         
         // Action
         const usecase = new AddThreadCommentUseCase(mockRepoThread,mockNanoId);

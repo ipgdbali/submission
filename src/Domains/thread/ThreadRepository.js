@@ -1,6 +1,4 @@
-/**
- *
- */
+/* eslint-disable no-unused-vars */
 class ThreadRepository {
 
     async addThread(domThread) {
@@ -30,6 +28,7 @@ class ThreadRepository {
     async getReplyById(id) {
         throw new Error("THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED")
     }
+
     async getRepliesByCommentId(id) {
         throw new Error("THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED")
     }

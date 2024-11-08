@@ -1,4 +1,3 @@
-const ThreadRepoTestHelper = require('../../../../tests/ThreadRepoTestHelper');
 const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const AuthenticationsTableTestHelper = require('../../../../tests/AuthenticationsTableTestHelper');
 

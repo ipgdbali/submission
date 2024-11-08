@@ -11,7 +11,7 @@ describe('GetThreadDetailUseCase',() => {
     it('should throw NotFoundError if ThreadId is not found',async () =>{
 
 
-        mockRepoThread.getThreadById = jest.fn((id) => Promise.resolve(null));
+        mockRepoThread.getThreadById = jest.fn(() => Promise.resolve(null));
 
         const usecase = new GetThreadDetailUseCase(mockRepoThread);
         await expect(() => usecase.execute({})).rejects.toThrow(new Error('NOT_FOUND_ERROR'));

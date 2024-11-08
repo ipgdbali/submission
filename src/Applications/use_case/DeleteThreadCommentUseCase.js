@@ -1,5 +1,3 @@
-const AuthorizationError = require("../../Commons/exceptions/AuthorizationError");
-
 class DeleteThreadCommentUseCase {
 
     constructor(repoThread) {

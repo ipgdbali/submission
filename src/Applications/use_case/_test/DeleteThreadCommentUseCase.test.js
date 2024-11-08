@@ -6,7 +6,7 @@ describe('DeleteThreadCommentUseCase', () => {
 
     it('should throw Error when Thread is not found',async () => {
 
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null));
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(null));
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
 
         await expect(() => usecase.execute({},{},{}) ).rejects.toThrowError('THREAD_NOT_FOUND')
@@ -15,8 +15,8 @@ describe('DeleteThreadCommentUseCase', () => {
 
     it('should throw Error when Comment is not found',async () => {
 
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve('something'))
-        mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(null) );
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve('something'))
+        mockRepoThread.getCommentById = jest.fn( () => Promise.resolve(null) );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
         await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('COMMENT_NOT_FOUND');
@@ -25,11 +25,11 @@ describe('DeleteThreadCommentUseCase', () => {
 
     it('should throw Error when Comment is not made by deleter',async () => {
 
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve('something'))
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve('something'))
         const comment_ret = {
             owner: 'userid'
         }
-        mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment_ret) );
+        mockRepoThread.getCommentById = jest.fn( () => Promise.resolve(comment_ret) );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
         await expect( () => usecase.execute({},{},{}) ).rejects.toThrowError('NOT_YOUR_COMMENT');
@@ -37,12 +37,12 @@ describe('DeleteThreadCommentUseCase', () => {
     })
 
     it('should return correct value',async () => {
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve('something'))
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve('something'))
         const comment_ret = {
             owner: 'userid'
         }
-        mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment_ret) );
-        mockRepoThread.delCommentById = jest.fn( (commentId) => Promise.resolve() );
+        mockRepoThread.getCommentById = jest.fn( () => Promise.resolve(comment_ret) );
+        mockRepoThread.delCommentById = jest.fn( () => Promise.resolve() );
 
         const usecase = new DeleteThreadCommentUseCase(mockRepoThread);
         const threadId = 'threadId';

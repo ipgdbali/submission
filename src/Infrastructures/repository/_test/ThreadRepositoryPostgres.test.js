@@ -3,9 +3,6 @@ const UsersTableTestHelper = require('../../../../tests/UsersTableTestHelper');
 const ThreadRepoTestHelper = require('../../../../tests/ThreadRepoTestHelper');
 
 const pool = require('../../database/postgres/pool');
-const Thread = require("../../../Domains/thread/entities/Thread");
-const Comment = require("../../../Domains/thread/entities/Comment");
-const Reply = require("../../../Domains/thread/entities/Reply");
 
 describe ('ThreadRepositoryPostgres', () => {
 

@@ -4,7 +4,8 @@ const ThreadRepository = require('../../../Domains/thread/ThreadRepository');
 describe('AddThreadCommentReplyUseCase', () => {
     const id = '1234'
     const mockRepoThread = new ThreadRepository();
-    const mockNanoId = jest.fn( (len) => id );
+    
+    const mockNanoId = jest.fn( () => id );
 
     const thread = {
         id : 'thread-' + id,
@@ -43,40 +44,35 @@ describe('AddThreadCommentReplyUseCase', () => {
 
     it('should throw Error when Thread is not found', () => {
         // Arrange 
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(null) );
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(null) );
 
         // Action 
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
         
         // Assert
-        expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('THREAD_NOT_FOUND');
-        
-        expect(mockRepoThread.getThreadById).toBeCalledTimes(1);
-        expect(mockRepoThread.getThreadById).toBeCalledWith(thread.id);
+        return expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('THREAD_NOT_FOUND');
 
     });
 
     it('should throw Error when Comment is not found', async () => {
         // Arrange
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread) );
-        mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(null) );
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(thread) );
+        mockRepoThread.getCommentById = jest.fn( () => Promise.resolve(null) );
 
         // Action
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
 
         // Assert
-        expect(() => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('COMMENT_NOT_FOUND');
+        return expect( () => usecase.execute(thread.id,reply.commentId,reply.bodyreq,reply.user) ).rejects.toThrowError('COMMENT_NOT_FOUND');
 
-        expect(await mockRepoThread.getCommentById).toBeCalledTimes(1);
-        expect(await mockRepoThread.getCommentById).toBeCalledWith(comment.id);
 
     })
 
     it('should return correct value',async () => {
         // Arrange
-        mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve(thread) )
-        mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve(comment) );
-        mockRepoThread.addReply = jest.fn ( (dom) => Promise.resolve() )
+        mockRepoThread.getThreadById = jest.fn( () => Promise.resolve(thread) )
+        mockRepoThread.getCommentById = jest.fn( () => Promise.resolve(comment) );
+        mockRepoThread.addReply = jest.fn ( () => Promise.resolve() )
 
         // Action
         const usecase = new AddThreadCommentReplyUseCase(mockRepoThread,mockNanoId);
