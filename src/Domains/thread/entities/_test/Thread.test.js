@@ -11,14 +11,14 @@ describe('An Thread Entity', () => {
     expect(() => new Thread(payload)).toThrowError('THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
 
     payload = {
-      id: 'threadid',
-      dt: Date.now(),
-      bodyreq:{
-        body:'thread-body'
+      id : 'threadid',
+      dt : Date.now(),
+      bodyreq : {
+        body : 'thread-body'
       },
-      user:{
-        id:'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       }      
     };
     expect(() => new Thread(payload)).toThrowError('THREAD.NOT_CONTAIN_NEEDED_PROPERTY');
@@ -28,29 +28,29 @@ describe('An Thread Entity', () => {
   it('should throw error when payload did not meet data type specification', () => {
 
     let payload = {
-      id: 'threadid',
-      dt: '12323123',
-      bodyreq:{
-        title: 'thread-title',
-        body:'thread-body'
+      id : 'threadid',
+      dt : '12323123',
+      bodyreq : {
+        title : 'thread-title',
+        body : 'thread-body'
       },
-      user:{
-        id:'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       }
     };
     expect(() => new Thread(payload)).toThrowError('THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
 
     payload = {
-      id: 'threadid',
-      dt: Date.now(),
-      bodyreq:{
-        title: 'thread-title',
-        body: 12
+      id : 'threadid',
+      dt : Date.now(),
+      bodyreq : {
+        title : 'thread-title',
+        body : 12
       },
-      user:{
-        id:'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       }
     };
     expect(() => new Thread(payload)).toThrowError('THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -59,15 +59,15 @@ describe('An Thread Entity', () => {
   it('should create addThread object correctly', () => {
     // Arrange
     const payload = {
-      id: 'threadid',
-      dt: Date.now(),
-      bodyreq:{
-        title: 'thread-title',
-        body:'thread-body'
+      id : 'threadid',
+      dt : Date.now(),
+      bodyreq : {
+        title : 'thread-title',
+        body : 'thread-body'
       },
-      user:{
-        id:'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       }
     };
 

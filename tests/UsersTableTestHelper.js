@@ -6,8 +6,8 @@ const UsersTableTestHelper = {
     id = 'user-123', username = 'dicoding', password = 'secret', fullname = 'Dicoding Indonesia',
   }) {
     const query = {
-      text: 'INSERT INTO users VALUES($1, $2, $3, $4)',
-      values: [id, username, password, fullname],
+      text : 'INSERT INTO users VALUES($1, $2, $3, $4)',
+      values : [id, username, password, fullname],
     };
 
     await pool.query(query);
@@ -15,8 +15,8 @@ const UsersTableTestHelper = {
 
   async findUsersById(id) {
     const query = {
-      text: 'SELECT * FROM users WHERE id = $1',
-      values: [id],
+      text : 'SELECT * FROM users WHERE id = $1',
+      values : [id],
     };
 
     const result = await pool.query(query);
@@ -24,7 +24,7 @@ const UsersTableTestHelper = {
   },
 
   async cleanTable() {
-    await pool.query('DELETE FROM users WHERE 1=1');
+    await pool.query('DELETE FROM users');
   },
 };
 

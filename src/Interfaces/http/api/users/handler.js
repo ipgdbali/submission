@@ -14,8 +14,8 @@ class UsersHandler {
     const addedUser = await addUserUseCase.execute(request.payload);
 
     const response = h.response({
-      status: 'success',
-      data: {
+      status : 'success',
+      data : {
         addedUser,
       },
     });

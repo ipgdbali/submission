@@ -16,18 +16,18 @@ describe('/users endpoint', () => {
     it('should response 201 and persisted user', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username : 'dicoding',
+        password : 'secret',
+        fullname : 'Dicoding Indonesia',
       };
       
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert
@@ -40,16 +40,16 @@ describe('/users endpoint', () => {
     it('should response 400 when request payload not contain needed property', async () => {
       // Arrange
       const requestPayload = {
-        fullname: 'Dicoding Indonesia',
-        password: 'secret',
+        fullname : 'Dicoding Indonesia',
+        password : 'secret',
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert
@@ -62,17 +62,17 @@ describe('/users endpoint', () => {
     it('should response 400 when request payload not meet data type specification', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding',
-        password: 'secret',
-        fullname: ['Dicoding Indonesia'],
+        username : 'dicoding',
+        password : 'secret',
+        fullname : ['Dicoding Indonesia'],
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert
@@ -85,17 +85,17 @@ describe('/users endpoint', () => {
     it('should response 400 when username more than 50 character', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicodingindonesiadicodingindonesiadicodingindonesiadicoding',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username : 'dicodingindonesiadicodingindonesiadicodingindonesiadicoding',
+        password : 'secret',
+        fullname : 'Dicoding Indonesia',
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert
@@ -108,17 +108,17 @@ describe('/users endpoint', () => {
     it('should response 400 when username contain restricted character', async () => {
       // Arrange
       const requestPayload = {
-        username: 'dicoding indonesia',
-        password: 'secret',
-        fullname: 'Dicoding Indonesia',
+        username : 'dicoding indonesia',
+        password : 'secret',
+        fullname : 'Dicoding Indonesia',
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert
@@ -130,19 +130,19 @@ describe('/users endpoint', () => {
 
     it('should response 400 when username unavailable', async () => {
       // Arrange
-      await UsersTableTestHelper.addUser({ username: 'dicoding' });
+      await UsersTableTestHelper.addUser({ username : 'dicoding' });
       const requestPayload = {
-        username: 'dicoding',
-        fullname: 'Dicoding Indonesia',
-        password: 'super_secret',
+        username : 'dicoding',
+        fullname : 'Dicoding Indonesia',
+        password : 'super_secret',
       };
       const server = await createServer(container);
 
       // Action
       const response = await server.inject({
-        method: 'POST',
-        url: '/users',
-        payload: requestPayload,
+        method : 'POST',
+        url : '/users',
+        payload : requestPayload,
       });
 
       // Assert

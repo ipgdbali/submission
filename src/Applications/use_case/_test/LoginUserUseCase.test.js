@@ -9,12 +9,12 @@ describe('GetAuthenticationUseCase', () => {
   it('should orchestrating the get authentication action correctly', async () => {
     // Arrange
     const useCasePayload = {
-      username: 'dicoding',
-      password: 'secret',
+      username : 'dicoding',
+      password : 'secret',
     };
     const mockedAuthentication = new NewAuth({
-      accessToken: 'access_token',
-      refreshToken: 'refresh_token',
+      accessToken : 'access_token',
+      refreshToken : 'refresh_token',
     });
     const mockUserRepository = new UserRepository();
     const mockAuthenticationRepository = new AuthenticationRepository();
@@ -37,10 +37,10 @@ describe('GetAuthenticationUseCase', () => {
 
     // create use case instance
     const loginUserUseCase = new LoginUserUseCase({
-      userRepository: mockUserRepository,
-      authenticationRepository: mockAuthenticationRepository,
-      authenticationTokenManager: mockAuthenticationTokenManager,
-      passwordHash: mockPasswordHash,
+      userRepository : mockUserRepository,
+      authenticationRepository : mockAuthenticationRepository,
+      authenticationTokenManager : mockAuthenticationTokenManager,
+      passwordHash : mockPasswordHash,
     });
 
     // Action
@@ -48,8 +48,8 @@ describe('GetAuthenticationUseCase', () => {
 
     // Assert
     expect(actualAuthentication).toEqual(new NewAuth({
-      accessToken: 'access_token',
-      refreshToken: 'refresh_token',
+      accessToken : 'access_token',
+      refreshToken : 'refresh_token',
     }));
     expect(mockUserRepository.getPasswordByUsername)
       .toBeCalledWith('dicoding');
@@ -58,9 +58,9 @@ describe('GetAuthenticationUseCase', () => {
     expect(mockUserRepository.getIdByUsername)
       .toBeCalledWith('dicoding');
     expect(mockAuthenticationTokenManager.createAccessToken)
-      .toBeCalledWith({ username: 'dicoding', id: 'user-123' });
+      .toBeCalledWith({ username : 'dicoding', id : 'user-123' });
     expect(mockAuthenticationTokenManager.createRefreshToken)
-      .toBeCalledWith({ username: 'dicoding', id: 'user-123' });
+      .toBeCalledWith({ username : 'dicoding', id : 'user-123' });
     expect(mockAuthenticationRepository.addToken)
       .toBeCalledWith(mockedAuthentication.refreshToken);
   });

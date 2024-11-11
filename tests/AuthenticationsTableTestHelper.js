@@ -4,8 +4,8 @@ const pool = require('../src/Infrastructures/database/postgres/pool');
 const AuthenticationsTableTestHelper = {
   async addToken(token) {
     const query = {
-      text: 'INSERT INTO authentications VALUES($1)',
-      values: [token],
+      text : 'INSERT INTO authentications VALUES($1)',
+      values : [token],
     };
 
     await pool.query(query);
@@ -13,8 +13,8 @@ const AuthenticationsTableTestHelper = {
 
   async findToken(token) {
     const query = {
-      text: 'SELECT token FROM authentications WHERE token = $1',
-      values: [token],
+      text : 'SELECT token FROM authentications WHERE token = $1',
+      values : [token],
     };
 
     const result = await pool.query(query);

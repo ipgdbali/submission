@@ -17,7 +17,7 @@ describe('UserRepositoryPostgres', () => {
   describe('verifyAvailableUsername function', () => {
     it('should throw InvariantError when username not available', async () => {
       // Arrange
-      await UsersTableTestHelper.addUser({ username: 'dicoding' }); // memasukan user baru dengan username dicoding
+      await UsersTableTestHelper.addUser({ username : 'dicoding' }); // memasukan user baru dengan username dicoding
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
 
       // Action & Assert
@@ -37,9 +37,9 @@ describe('UserRepositoryPostgres', () => {
     it('should persist register user and return registered user correctly', async () => {
       // Arrange
       const registerUser = new RegisterUser({
-        username: 'dicoding',
-        password: 'secret_password',
-        fullname: 'Dicoding Indonesia',
+        username : 'dicoding',
+        password : 'secret_password',
+        fullname : 'Dicoding Indonesia',
       });
       const fakeIdGenerator = () => '123'; // stub!
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
@@ -55,9 +55,9 @@ describe('UserRepositoryPostgres', () => {
     it('should return registered user correctly', async () => {
       // Arrange
       const registerUser = new RegisterUser({
-        username: 'dicoding',
-        password: 'secret_password',
-        fullname: 'Dicoding Indonesia',
+        username : 'dicoding',
+        password : 'secret_password',
+        fullname : 'Dicoding Indonesia',
       });
       const fakeIdGenerator = () => '123'; // stub!
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, fakeIdGenerator);
@@ -67,9 +67,9 @@ describe('UserRepositoryPostgres', () => {
 
       // Assert
       expect(registeredUser).toStrictEqual(new RegisteredUser({
-        id: 'user-123',
-        username: 'dicoding',
-        fullname: 'Dicoding Indonesia',
+        id : 'user-123',
+        username : 'dicoding',
+        fullname : 'Dicoding Indonesia',
       }));
     });
   });
@@ -89,8 +89,8 @@ describe('UserRepositoryPostgres', () => {
       // Arrange
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
       await UsersTableTestHelper.addUser({
-        username: 'dicoding',
-        password: 'secret_password',
+        username : 'dicoding',
+        password : 'secret_password',
       });
 
       // Action & Assert
@@ -112,7 +112,7 @@ describe('UserRepositoryPostgres', () => {
 
     it('should return user id correctly', async () => {
       // Arrange
-      await UsersTableTestHelper.addUser({ id: 'user-321', username: 'dicoding' });
+      await UsersTableTestHelper.addUser({ id : 'user-321', username : 'dicoding' });
       const userRepositoryPostgres = new UserRepositoryPostgres(pool, {});
 
       // Action

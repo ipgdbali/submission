@@ -2,42 +2,44 @@ const Hapi = require('@hapi/hapi');
 const Jwt = require('@hapi/jwt');
 
 const ClientError = require('../../Commons/exceptions/ClientError');
+const AuthorizationError = require('../../Commons/exceptions/AuthorizationError');
 const DomainErrorTranslator = require('../../Commons/exceptions/DomainErrorTranslator');
 
 const users = require('../../Interfaces/http/api/users');
 const authentications = require('../../Interfaces/http/api/authentications');
 const thread = require('../../Interfaces/http/api/threads');
 
+
 const createServer = async (container) => {
   const server = Hapi.server({
-    host: process.env.HOST,
-    port: process.env.PORT,
+    host : process.env.HOST,
+    port : process.env.PORT,
   });
 
   await server.register(Jwt);
-  server.auth.strategy('jwt','jwt',{
-    keys: process.env.ACCESS_TOKEN_KEY,
-    verify:{
-      aud:false,
-      iss:false,
-      sub:false,
-      maxAgeSec: process.env.ACCCESS_TOKEN_AGE
+  server.auth.strategy('jwt', 'jwt', {
+    keys : process.env.ACCESS_TOKEN_KEY,
+    verify : {
+      aud : false,
+      iss : false,
+      sub : false,
+      maxAgeSec : process.env.ACCCESS_TOKEN_AGE
     },
-    validate: false
-  })
+    validate : false
+  });
 
   await server.register([
     {
-      plugin: users,
-      options: { container },
+      plugin : users,
+      options : { container },
     },
     {
-      plugin: authentications,
-      options: { container },
+      plugin : authentications,
+      options : { container },
     },
     {
-      plugin: thread,
-      options: { container }
+      plugin : thread,
+      options : { container }
     }
   ]);
 
@@ -52,11 +54,22 @@ const createServer = async (container) => {
       // penanganan client error secara internal.
       if (translatedError instanceof ClientError) {
         const newResponse = h.response({
-          status: 'fail',
-          message: translatedError.message,
+          status : 'fail',
+          message : translatedError.message,
         });
         newResponse.code(translatedError.statusCode);
         return newResponse;
+      }
+
+      if(translatedError instanceof AuthorizationError) {
+
+        const newResponse = h.response({
+          status : 'fail',
+          message : translatedError.message
+        });
+        newResponse.code(translatedError.statusCode);
+        return newResponse;
+
       }
 
       // mempertahankan penanganan client error oleh hapi secara native, seperti 404, etc.
@@ -66,8 +79,8 @@ const createServer = async (container) => {
 
       // penanganan server error sesuai kebutuhan
       const newResponse = h.response({
-        status: 'error',
-        message: 'terjadi kegagalan pada server kami',
+        status : 'error',
+        message : 'terjadi kegagalan pada server kami',
       });
       newResponse.code(500);
       return newResponse;

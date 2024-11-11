@@ -13,16 +13,16 @@ describe('An Comment Entity', () => {
     payload = 0;
 
     payload = {
-      id:'MyId',
-      dt:Date.now(),
-      threadId:'MyThreadId',
-      bodyreq:{
+      id : 'MyId',
+      dt : Date.now(),
+      threadId : 'MyThreadId',
+      bodyreq : {
       },
-      user:{
-        id: 'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       },
-      is_delete:false
+      is_delete : false
     };
     expect(() => new Comment(payload)).toThrowError('COMMENT.NOT_CONTAIN_NEEDED_PROPERTY');
 
@@ -33,34 +33,34 @@ describe('An Comment Entity', () => {
 
     // Arrange
     let payload = {
-      id:'MyId',
-      dt:'123',
-      threadId:'MyThreadId',
-      bodyreq:{
-        content:'My Content'
+      id : 'MyId',
+      dt : '123',
+      threadId : 'MyThreadId',
+      bodyreq : {
+        content : 'My Content'
       },
-      user:{
-        id: 'userid',
-        username: 'username'
+      user : {
+        id : 'userid',
+        username : 'username'
       },
-      is_delete:false
+      is_delete : false
     };
 
     // Action and Assert
     expect(() => new Comment(payload)).toThrowError('COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
 
     payload = {
-      id:'MyId',
-      dt:Date.now(),
-      threadId:'MyThreadId',
-      bodyreq:{
-        content:'My Content'
+      id : 'MyId',
+      dt : Date.now(),
+      threadId : 'MyThreadId',
+      bodyreq : {
+        content : 'My Content'
       },
-      user:{
-        id: 12,
-        username: 'username'
+      user : {
+        id : 12,
+        username : 'username'
       },
-      is_delete:false
+      is_delete : false
     };
 
     // Action and Assert
@@ -72,17 +72,17 @@ describe('An Comment Entity', () => {
 
     // Arrange
     const payload = {
-        id:'MyId',
-        dt:Date.now(),
-        threadId:'MyThreadId',
-        bodyreq:{
-          content:'My Content'
-        },
-        user:{
-          id: 'userid',
-          username: 'username'
-        },
-        is_delete:false
+      id : 'MyId',
+      dt : Date.now(),
+      threadId : 'MyThreadId',
+      bodyreq : {
+        content : 'My Content'
+      },
+      user : {
+        id : 'userid',
+        username : 'username'
+      },
+      is_delete : false
     };
 
     // Action

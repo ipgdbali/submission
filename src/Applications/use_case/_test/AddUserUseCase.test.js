@@ -11,15 +11,15 @@ describe('AddUserUseCase', () => {
   it('should orchestrating the add user action correctly', async () => {
     // Arrange
     const useCasePayload = {
-      username: 'dicoding',
-      password: 'secret',
-      fullname: 'Dicoding Indonesia',
+      username : 'dicoding',
+      password : 'secret',
+      fullname : 'Dicoding Indonesia',
     };
 
     const mockRegisteredUser = new RegisteredUser({
-      id: 'user-123',
-      username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      id : 'user-123',
+      username : useCasePayload.username,
+      fullname : useCasePayload.fullname,
     });
 
     /** creating dependency of use case */
@@ -36,8 +36,8 @@ describe('AddUserUseCase', () => {
 
     /** creating use case instance */
     const getUserUseCase = new AddUserUseCase({
-      userRepository: mockUserRepository,
-      passwordHash: mockPasswordHash,
+      userRepository : mockUserRepository,
+      passwordHash : mockPasswordHash,
     });
 
     // Action
@@ -45,17 +45,17 @@ describe('AddUserUseCase', () => {
 
     // Assert
     expect(registeredUser).toStrictEqual(new RegisteredUser({
-      id: 'user-123',
-      username: useCasePayload.username,
-      fullname: useCasePayload.fullname,
+      id : 'user-123',
+      username : useCasePayload.username,
+      fullname : useCasePayload.fullname,
     }));
 
     expect(mockUserRepository.verifyAvailableUsername).toBeCalledWith(useCasePayload.username);
     expect(mockPasswordHash.hash).toBeCalledWith(useCasePayload.password);
     expect(mockUserRepository.addUser).toBeCalledWith(new RegisterUser({
-      username: useCasePayload.username,
-      password: 'encrypted_password',
-      fullname: useCasePayload.fullname,
+      username : useCasePayload.username,
+      password : 'encrypted_password',
+      fullname : useCasePayload.fullname,
     }));
   });
 });

@@ -40,48 +40,48 @@ const container = createContainer();
 // registering services and repository
 container.register([
   {
-    key: UserRepository.name,
-    Class: UserRepositoryPostgres,
-    parameter: {
-      dependencies: [
+    key : UserRepository.name,
+    Class : UserRepositoryPostgres,
+    parameter : {
+      dependencies : [
         {
-          concrete: pool,
+          concrete : pool,
         },
         {
-          concrete: nanoid,
-        },
-      ],
-    },
-  },
-  {
-    key: AuthenticationRepository.name,
-    Class: AuthenticationRepositoryPostgres,
-    parameter: {
-      dependencies: [
-        {
-          concrete: pool,
+          concrete : nanoid,
         },
       ],
     },
   },
   {
-    key: PasswordHash.name,
-    Class: BcryptPasswordHash,
-    parameter: {
-      dependencies: [
+    key : AuthenticationRepository.name,
+    Class : AuthenticationRepositoryPostgres,
+    parameter : {
+      dependencies : [
         {
-          concrete: bcrypt,
+          concrete : pool,
         },
       ],
     },
   },
   {
-    key: AuthenticationTokenManager.name,
-    Class: JwtTokenManager,
-    parameter: {
-      dependencies: [
+    key : PasswordHash.name,
+    Class : BcryptPasswordHash,
+    parameter : {
+      dependencies : [
         {
-          concrete: Jwt.token,
+          concrete : bcrypt,
+        },
+      ],
+    },
+  },
+  {
+    key : AuthenticationTokenManager.name,
+    Class : JwtTokenManager,
+    parameter : {
+      dependencies : [
+        {
+          concrete : Jwt.token,
         },
       ],
     },
@@ -91,161 +91,161 @@ container.register([
 // registering use cases
 container.register([
   {
-    key: AddUserUseCase.name,
-    Class: AddUserUseCase,
-    parameter: {
-      injectType: 'destructuring',
-      dependencies: [
-        {
-          name: 'userRepository',
-          internal: UserRepository.name,
-        },
-        {
-          name: 'passwordHash',
-          internal: PasswordHash.name,
-        },
-      ],
-    },
-  },
-  {
-    key: LoginUserUseCase.name,
-    Class: LoginUserUseCase,
-    parameter: {
-      injectType: 'destructuring',
-      dependencies: [
-        {
-          name: 'userRepository',
-          internal: UserRepository.name,
-        },
-        {
-          name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
-        },
-        {
-          name: 'authenticationTokenManager',
-          internal: AuthenticationTokenManager.name,
-        },
-        {
-          name: 'passwordHash',
-          internal: PasswordHash.name,
-        },
-      ],
-    },
-  },
-  {
-    key: LogoutUserUseCase.name,
-    Class: LogoutUserUseCase,
-    parameter: {
-      injectType: 'destructuring',
-      dependencies: [
-        {
-          name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
-        },
-      ],
-    },
-  },
-  {
-    key: RefreshAuthenticationUseCase.name,
-    Class: RefreshAuthenticationUseCase,
-    parameter: {
-      injectType: 'destructuring',
-      dependencies: [
-        {
-          name: 'authenticationRepository',
-          internal: AuthenticationRepository.name,
-        },
-        {
-          name: 'authenticationTokenManager',
-          internal: AuthenticationTokenManager.name,
-        },
-      ],
-    },
-  },
-  {
-    key: ThreadRepository.name,
-    Class: ThreadRepositoryPostgres,
-    parameter:{
+    key : AddUserUseCase.name,
+    Class : AddUserUseCase,
+    parameter : {
+      injectType : 'destructuring',
       dependencies : [
         {
-          concrete: pool,
+          name : 'userRepository',
+          internal : UserRepository.name,
+        },
+        {
+          name : 'passwordHash',
+          internal : PasswordHash.name,
+        },
+      ],
+    },
+  },
+  {
+    key : LoginUserUseCase.name,
+    Class : LoginUserUseCase,
+    parameter : {
+      injectType : 'destructuring',
+      dependencies : [
+        {
+          name : 'userRepository',
+          internal : UserRepository.name,
+        },
+        {
+          name : 'authenticationRepository',
+          internal : AuthenticationRepository.name,
+        },
+        {
+          name : 'authenticationTokenManager',
+          internal : AuthenticationTokenManager.name,
+        },
+        {
+          name : 'passwordHash',
+          internal : PasswordHash.name,
+        },
+      ],
+    },
+  },
+  {
+    key : LogoutUserUseCase.name,
+    Class : LogoutUserUseCase,
+    parameter : {
+      injectType : 'destructuring',
+      dependencies : [
+        {
+          name : 'authenticationRepository',
+          internal : AuthenticationRepository.name,
+        },
+      ],
+    },
+  },
+  {
+    key : RefreshAuthenticationUseCase.name,
+    Class : RefreshAuthenticationUseCase,
+    parameter : {
+      injectType : 'destructuring',
+      dependencies : [
+        {
+          name : 'authenticationRepository',
+          internal : AuthenticationRepository.name,
+        },
+        {
+          name : 'authenticationTokenManager',
+          internal : AuthenticationTokenManager.name,
+        },
+      ],
+    },
+  },
+  {
+    key : ThreadRepository.name,
+    Class : ThreadRepositoryPostgres,
+    parameter : {
+      dependencies : [
+        {
+          concrete : pool,
         }
       ]
     }
   },
   {
-    key:  AddThreadUseCase.name,
-    Class: AddThreadUseCase,
-    parameter:{
-      dependencies:[
+    key : AddThreadUseCase.name,
+    Class : AddThreadUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
-        },{
-          concrete:nanoid
+          name : 'threadRepository',
+          internal : ThreadRepository.name
+        }, {
+          concrete : nanoid
         }
       ]
     }
   },
   {
-    key: AddCommentUseCase.name,
-    Class: AddCommentUseCase,
-    parameter:{
-      dependencies:[
+    key : AddCommentUseCase.name,
+    Class : AddCommentUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
-        },{
-          concrete:nanoid
+          name : 'threadRepository',
+          internal : ThreadRepository.name
+        }, {
+          concrete : nanoid
         }
       ]
     }
   },
   {
-    key:GetThreadDetailUseCase.name,
-    Class:GetThreadDetailUseCase,
-    parameter:{
-      dependencies:[
+    key : GetThreadDetailUseCase.name,
+    Class : GetThreadDetailUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
+          name : 'threadRepository',
+          internal : ThreadRepository.name
         }
       ]
     }
   },
   {
-    key: DeleteCommentUseCase.name,
-    Class:DeleteCommentUseCase,
-    parameter:{
-      dependencies:[
+    key : DeleteCommentUseCase.name,
+    Class : DeleteCommentUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
+          name : 'threadRepository',
+          internal : ThreadRepository.name
         }
       ]
     }    
   },
   {
-    key:AddReplyUseCase.name,
-    Class:AddReplyUseCase,
-    parameter:{
-      dependencies:[
+    key : AddReplyUseCase.name,
+    Class : AddReplyUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
-        },{
-          concrete:nanoid
+          name : 'threadRepository',
+          internal : ThreadRepository.name
+        }, {
+          concrete : nanoid
         }
       ]
     }
-  },{
-    key:DeleteReplyUseCase.name,
-    Class:DeleteReplyUseCase,
-    parameter:{
-      dependencies:[
+  }, {
+    key : DeleteReplyUseCase.name,
+    Class : DeleteReplyUseCase,
+    parameter : {
+      dependencies : [
         {
-          name:'threadRepository',
-          internal:ThreadRepository.name
+          name : 'threadRepository',
+          internal : ThreadRepository.name
         }
       ]
     }

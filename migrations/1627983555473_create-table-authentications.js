@@ -1,8 +1,8 @@
 exports.up = (pgm) => {
   pgm.createTable('authentications', {
-    token: {
-      type: 'TEXT',
-      notNull: true,
+    token : {
+      type : 'TEXT',
+      notNull : true,
     },
   });
 };
