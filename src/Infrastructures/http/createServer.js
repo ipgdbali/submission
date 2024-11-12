@@ -47,7 +47,9 @@ const createServer = async (container) => {
     // mendapatkan konteks response dari request
     const { response } = request;
 
+
     if (response instanceof Error) {
+
       // bila response tersebut error, tangani sesuai kebutuhan
       const translatedError = DomainErrorTranslator.translate(response);
 
@@ -59,17 +61,6 @@ const createServer = async (container) => {
         });
         newResponse.code(translatedError.statusCode);
         return newResponse;
-      }
-
-      if(translatedError instanceof AuthorizationError) {
-
-        const newResponse = h.response({
-          status : 'fail',
-          message : translatedError.message
-        });
-        newResponse.code(translatedError.statusCode);
-        return newResponse;
-
       }
 
       // mempertahankan penanganan client error oleh hapi secara native, seperti 404, etc.

@@ -127,6 +127,8 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
     }));        
   }
 
+  
+
 }
   
 module.exports = ThreadRepositoryPostgres;

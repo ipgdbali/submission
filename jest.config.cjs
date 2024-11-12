@@ -1,6 +1,6 @@
 const config = {
-  verbose : true,
-  setupFiles : ['dotenv/config'],
+  verbose : false,
+  setupFiles : ['dotenv/config']
 };
   
 module.exports = config;
