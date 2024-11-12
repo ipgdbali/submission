@@ -77,6 +77,15 @@ class ThreadsHandler {
     }).code(200);
 
   }
+
+  async likeUnlikeThreadsComment(req,h) {
+    await this._container.getInstance(LikeUnlikeThreadsCommentUseCase.name).execute(req.params.threadId, req.params.commentId, req.auth.credentials);
+
+    return h.response({
+      status : 'sucess'
+    }).code(200);
+    
+  }
 }
 
 module.exports = ThreadsHandler;
