@@ -127,7 +127,21 @@ class ThreadRepositoryPostgres extends require('./../../Domains/thread/ThreadRep
     }));        
   }
 
-  
+  async isExistLikeUnlike(domLikeUnlike) {
+    const res = await this._pool.query('SELECT commentid,userid FROM likeunlike WHERE commentid = $1 AND userid = $2', [domLikeUnlike.commentId,domLikeUnlike.owner]);
+    if(res.rowCount == 0)
+      return false;
+    else
+      return true;
+  }
+
+  async addLikeUnlike(domLikeUnlike) {
+    await this._pool.query('INSERT INTO likeunlike (commentid,userid) VALUES ($1,$2)', [domLikeUnlike.commentId, domLikeUnlike.owner]);
+  }
+
+  async rmLikeUnlike(domLikeUnlike) {
+    await this._pool.query('DELETE FROM likeunlike WHERE commentid = $1 AND userid = $2', [domLikeUnlike.commentId, domLikeUnlike.owner]);
+  }  
 
 }
   

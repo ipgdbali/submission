@@ -307,8 +307,70 @@ describe('ThreadRepositoryPostgres', () => {
       expect(ret[0].owner).toBe(reply.owner);
       expect(ret[0].is_delete).toBe(false);
 
-
     });
   });
-    
+
+  describe('Proyek 2 Optional Feature', () => {
+    it('isExistLikeUnlike should work correctly', async () => {
+
+      let payload = {
+        commentId : 'commentId',
+        owner : 'userid'
+      };
+  
+      let res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+      await repo.addLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(true);
+  
+      await repo.rmLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+    });
+  
+    it('addLikeUnlike should work correctly', async () => {
+  
+      let payload = {
+        commentId : 'commentId',
+        owner : 'userid'
+      };
+  
+      let res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+      await repo.addLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(true);
+  
+      await repo.rmLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+    });
+  
+    it('rmLikeUnlike should work correctly', async () => {
+  
+      let payload = {
+        commentId : 'commentId',
+        owner : 'userid'
+      };
+  
+      let res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+      await repo.addLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(true);
+  
+      await repo.rmLikeUnlike(payload);
+      res = await repo.isExistLikeUnlike(payload);
+      expect(res).toBe(false);
+  
+    });
+  
+  });
+  
 });
