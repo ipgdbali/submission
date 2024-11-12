@@ -223,25 +223,25 @@ describe('Proyek 1 - Kriteria 4', () => {
       expect(responseJson.data.thread.comments).toHaveLength(2);
 
       expect(responseJson.data.thread.comments[0]).toBeDefined();
-      expect(responseJson.data.thread.comments[0].id).toBeDefined();
+      expect(responseJson.data.thread.comments[0].id).toBe(commentId1);
       expect(responseJson.data.thread.comments[0].username).toBe('dicoding');
       expect(responseJson.data.thread.comments[0].date).toBeDefined();
       expect(responseJson.data.thread.comments[0].content).toBe('My Comment 1');
       expect(responseJson.data.thread.comments[0].replies).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies).toHaveLength(2);
 
-      expect(responseJson.data.thread.comments[0].replies[0].id).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies[0].id).toBe(replyId1);
       expect(responseJson.data.thread.comments[0].replies[0].content).toBe('My Reply 1');
       expect(responseJson.data.thread.comments[0].replies[0].date).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies[0].username).toBe('dicoding');
 
-      expect(responseJson.data.thread.comments[0].replies[1].id).toBeDefined();
+      expect(responseJson.data.thread.comments[0].replies[1].id).toBe(replyId2);
       expect(responseJson.data.thread.comments[0].replies[1].content).toBe('**balasan telah dihapus**');
       expect(responseJson.data.thread.comments[0].replies[1].date).toBeDefined();
       expect(responseJson.data.thread.comments[0].replies[1].username).toBe('dicoding');
 
       expect(responseJson.data.thread.comments[1]).toBeDefined();
-      expect(responseJson.data.thread.comments[1].id).toBeDefined();
+      expect(responseJson.data.thread.comments[1].id).toBe(commentId2);
       expect(responseJson.data.thread.comments[1].username).toBe('dicoding');
       expect(responseJson.data.thread.comments[1].date).toBeDefined();
       expect(responseJson.data.thread.comments[1].content).toBe('**komentar telah dihapus**');
