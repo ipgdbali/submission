@@ -95,6 +95,7 @@ describe('GetThreadDetailUseCase', () => {
     mockRepoThread.getThreadById = jest.fn( (id) => Promise.resolve( (id === threadId)?thread:null));
     mockRepoThread.getCommentsByThreadId = jest.fn( (id) => Promise.resolve( (id === threadId)? comments : [] ));
     mockRepoThread.getRepliesByCommentId = jest.fn( (id) => Promise.resolve( (id === comments[0].id)?replies: [] ));
+    mockRepoThread.getLikeCountByCommentId = jest.fn( (id) => Promise.resolve( (id === comments[0].id)?1: 0) );
 
     const usecase = new GetThreadDetailUseCase(mockRepoThread);
 
@@ -107,7 +108,7 @@ describe('GetThreadDetailUseCase', () => {
     expect(mockRepoThread.getCommentsByThreadId).toBeCalledWith(threadId);
 
     expect(mockRepoThread.getRepliesByCommentId).toBeCalledTimes(2);
-    expect(mockRepoThread.getRepliesByCommentId).toBeCalledWith(comments[0].id);
+    expect(mockRepoThread.getLikeCountByCommentId).toBeCalledTimes(2);
 
     expect(ret.thread.id).toBe(thread.id);
     expect(ret.thread.title).toBe(thread.title);

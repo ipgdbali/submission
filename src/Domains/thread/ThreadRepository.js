@@ -41,6 +41,21 @@ class ThreadRepository {
     throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   }
 
+  async isExistLikeUnlike(domLikeUnlike) {
+    throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
+  async addLikeUnlike(domLikeUnlike) {
+    throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
+
+  async rmLikeUnlike(domLikeUnlike) {
+    throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');    
+  }
+
+  async getLikeCountByCommentId(id) {
+    throw new Error('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+  }
+
 }
   
 module.exports = ThreadRepository;

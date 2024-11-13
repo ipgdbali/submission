@@ -22,11 +22,13 @@ DomainErrorTranslator._directories = {
 
   // DOMAIN
   'THREAD.NOT_CONTAIN_NEEDED_PROPERTY' : new InvariantError('tidak dapat membuat domain thread karena properti yang dibutuhkan tidak ada'),
-  'THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain thread karena tidak data tidak sesuai'),
+  'THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain thread karena tipe data tidak sesuai'),
   'COMMENT.NOT_CONTAIN_NEEDED_PROPERTY' : new InvariantError('tidak dapat membuat domain comment karena properti yang dibutuhkan tidak ada'),
-  'COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain comment karena tidak data tidak sesuai'),
+  'COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain comment karena tipe data tidak sesuai'),
   'REPLY.NOT_CONTAIN_NEEDED_PROPERTY' : new InvariantError('tidak dapat membuat domain reply karena properti yang dibutuhkan tidak ada'),
-  'REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain reply karena tidak data tidak sesuai'),
+  'REPLY.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain reply karena tipe data tidak sesuai'),
+  'LIKE_UNLIKE.NOT_CONTAIN_NEEDED_PROPERTY' : new InvariantError('tidak dapat membuat domain LikeUnlike karena property yang dibutuhkan tidak ada'),
+  'LIKE_UNLIKE.NOT_MEET_DATA_TYPE_SPECIFICATION' : new InvariantError('tidak dapat membuat domain LikeUnlike karena tipe data tidak sesuai'),
 
   // USE CASE
   'THREAD_NOT_FOUND' : new NotFoundError('Thread tidak ada'),

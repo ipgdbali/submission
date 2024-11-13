@@ -55,15 +55,29 @@ const routes = (handler) => ([
   },
   {
     /*
-        Menghapus balasan pada koemtar Thread
-        */
+      Menghapus balasan pada koemtar Thread
+    */
     method : 'DELETE',
     path : '/threads/{threadId}/comments/{commentId}/replies/{replyId}',
     handler : handler.deleteThreadsCommentsRepliesHandler,
     options : {
       auth : 'jwt'
     }
-  }
+  },
+  {
+    /*
+      Like and Unlike Comment Feature
+    */
+
+    method : 'PUT',
+    path : '/threads/{threadId}/comments/{commentId}/likes',
+    handler : handler.likeUnlikeThreadsCommentHandler,
+    options : {
+      auth : 'jwt'
+    }
+    
+  },
+
 ]);
   
 module.exports = routes;
