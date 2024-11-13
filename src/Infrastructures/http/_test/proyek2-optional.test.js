@@ -130,7 +130,7 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/{commentId}/likes'
+        url : `/threads/${threadId}/comments/${commentId}/likes`
       });
 
       expect(response.statusCode).toEqual(401);
@@ -141,7 +141,7 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/xxx/comments/{commentId}/likes',
+        url : `/threads/xxx/comments/${commentId}/likes`,
         headers : {
           'Authorization' : `Bearer ${accessTokenUser1}`
         },        
@@ -155,13 +155,13 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/xxx/likes',
+        url : `/threads/${threadId}/comments/xxx/likes`,
         headers : {
           'Authorization' : `Bearer ${accessTokenUser1}`
         },        
       });
 
-      expect(response.statusCode).toEqual(401);
+      expect(response.statusCode).toEqual(404);
 
     });
 
@@ -193,7 +193,7 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/{commentId}/likes',
+        url : `/threads/${threadId}/comments/${commentId}/likes`,
         headers : {
           'Authorization' : `Bearer ${accessTokenUser1}`
         },          
@@ -229,10 +229,9 @@ describe('Proyek 2 - Optional', () => {
     });
 
     it('should like if never liked before - user 2 ', async () => {
-
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/{commentId}/likes',
+        url : `/threads/${threadId}/comments/${commentId}/likes`,
         headers : {
           'Authorization' : `Bearer ${accessTokenUser2}`
         },          
@@ -241,7 +240,6 @@ describe('Proyek 2 - Optional', () => {
       expect(response.statusCode).toEqual(200);
       const responseJson = JSON.parse(response.payload);
       expect(responseJson.status).toBe('success');
-
 
     });
 
@@ -272,7 +270,7 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/{commentId}/likes',
+        url : `/threads/${threadId}/comments/${commentId}/likes`,
         headers : {
           'Authorization' : `Bearer ${accessTokenUser1}`
         },          
@@ -311,9 +309,9 @@ describe('Proyek 2 - Optional', () => {
 
       const response = await server.inject({
         method : 'PUT',
-        url : '/threads/{threadId}/comments/{commentId}/likes',
+        url : `/threads/${threadId}/comments/${commentId}/likes`,
         headers : {
-          'Authorization' : `Bearer ${accessTokenUser1}`
+          'Authorization' : `Bearer ${accessTokenUser2}`
         },          
       });
 

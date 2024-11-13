@@ -21,6 +21,8 @@ describe('Thread interface', () => {
     await expect(() => repoThread.isExistLikeUnlike({})).rejects.toThrow('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(() => repoThread.addLikeUnlike({})).rejects.toThrow('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(() => repoThread.rmLikeUnlike({})).rejects.toThrow('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(() => repoThread.getLikeCountByCommentId({})).rejects.toThrow('THREAD_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    
 
   });
 });

@@ -3,17 +3,27 @@ const LikeUnlike = require('../LikeUnlike');
 describe('A LikeUnlike Entity', () => {
 
   it('should throw error when payload did not containt property', () => {
+    let payload = {
 
-    const payload = {
     };
 
     expect(() => new LikeUnlike(payload)).toThrow('LIKE_UNLIKE.NOT_CONTAIN_NEEDED_PROPERTY');
 
+    payload = {
+      commentId : 'commentId',
+      user : {
+        id : 'userid'
+      }
+    };
+
+    expect(() => new LikeUnlike(payload)).toThrow('LIKE_UNLIKE.NOT_CONTAIN_NEEDED_PROPERTY');
+    
   });
+
 
   it('should throw error payload did not meet data type specification', () => {
 
-    const payload = {
+    let payload = {
       commentId : 1234,
       user : {
         id : 'userId',
@@ -21,6 +31,10 @@ describe('A LikeUnlike Entity', () => {
       }
     };
 
+    expect(() => new LikeUnlike(payload)).toThrow('LIKE_UNLIKE.NOT_MEET_DATA_TYPE_SPECIFICATION');
+
+    payload.commentId = 'commentId';
+    payload.user.id = 1234;
     expect(() => new LikeUnlike(payload)).toThrow('LIKE_UNLIKE.NOT_MEET_DATA_TYPE_SPECIFICATION');
 
   });

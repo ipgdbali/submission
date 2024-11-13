@@ -21,6 +21,8 @@ class GetThreadDetailUseCase {
         
         
     for(const comment of comments) {
+
+      comment.likeCount = await this._repoThread.getLikeCountByCommentId(comment.id);
       const replies = await this._repoThread.getRepliesByCommentId(comment.id);
       comment.replies = replies.map( (x) => ({
         id : x.id,
@@ -28,6 +30,7 @@ class GetThreadDetailUseCase {
         date : new Date(x.dt).toISOString(),
         username : x.username
       }));
+      
     }
             
         

@@ -36,7 +36,7 @@ describe('LikeUnlikeUseCase', () => {
     threadId : thread.id,
     commentId : comment.id,
     user
-  })
+  });
 
   let mockRepoThread;
 
@@ -57,7 +57,7 @@ describe('LikeUnlikeUseCase', () => {
 
   });
 
-  it('should throw error if comment is notfound/invalid',async () => {
+  it('should throw error if comment is notfound/invalid', async () => {
 
     mockRepoThread.getThreadById = jest.fn( (threadId) => Promise.resolve((threadId == thread.id)? thread : null) );
     mockRepoThread.getCommentById = jest.fn( (commentId) => Promise.resolve((commentId == comment.id)? comment : null) );
@@ -111,4 +111,4 @@ describe('LikeUnlikeUseCase', () => {
 
   });
 
-})
+});

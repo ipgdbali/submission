@@ -4,6 +4,7 @@ const DeleteThreadCommentUseCase = require('../../../../Applications/use_case/De
 const GetThreadDetailUseCase = require('../../../../Applications/use_case/GetThreadDetailUseCase');
 const AddThreadCommentReplyUseCase = require('../../../../Applications/use_case/AddThreadCommentReplyUseCase');
 const DeleteThreadCommentReplyUseCase = require('../../../../Applications/use_case/DeleteThreadCommentReplyUseCase');
+const LikeUnlikeThreadsCommentUseCase = require('../../../../Applications/use_case/LikeUnlikeThreadsCommentUseCase');
 
 /**
  *
@@ -19,6 +20,7 @@ class ThreadsHandler {
     this.getThreadsHandler = this.getThreadsHandler.bind(this);
     this.postThreadsCommentsRepliesHandler = this.postThreadsCommentsRepliesHandler.bind(this);
     this.deleteThreadsCommentsRepliesHandler = this.deleteThreadsCommentsRepliesHandler.bind(this);
+    this.likeUnlikeThreadsCommentHandler = this.likeUnlikeThreadsCommentHandler.bind(this);
 
   }
 
@@ -78,12 +80,12 @@ class ThreadsHandler {
 
   }
 
-  async likeUnlikeThreadsComment(req,h) {
+  async likeUnlikeThreadsCommentHandler(req, h) {
     
     await this._container.getInstance(LikeUnlikeThreadsCommentUseCase.name).execute(req.params.threadId, req.params.commentId, req.auth.credentials);
 
     return h.response({
-      status : 'sucess'
+      status : 'success'
     }).code(200);
 
   }

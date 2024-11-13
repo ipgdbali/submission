@@ -1,12 +1,11 @@
 const LikeUnlike = require('../../Domains/thread/entities/LikeUnlike');
 
-class LikeUnlikeThreadCommentUseCase
-{
+class LikeUnlikeThreadCommentUseCase {
   constructor(repoThread) {
     this._repoThread = repoThread;
   }
 
-  async execute(threadId,commentId,credential) {
+  async execute(threadId, commentId, credential) {
 
     if(!await this._repoThread.getThreadById(threadId)) {
       throw new Error('THREAD_NOT_FOUND');
@@ -29,6 +28,6 @@ class LikeUnlikeThreadCommentUseCase
     }
 
   }
-};
+}
 
 module.exports = LikeUnlikeThreadCommentUseCase;

@@ -30,6 +30,6 @@ class LikeUnlike {
 
   }
 
-};
+}
 
 module.exports = LikeUnlike;
